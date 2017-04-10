@@ -1,0 +1,14 @@
+#play-list{
+	height: 70%;
+	background-color: #ccc;
+} 
+#all-music{
+	height: 70%;
+	background-color: #ccc;
+} 
+.my-player-wrapper{
+	height: 30%;
+	background-color: #348a46;
+	position: fixed;
+	bottom: 0px;
+}  
