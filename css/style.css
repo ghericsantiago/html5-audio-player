@@ -1,14 +1,56 @@
+body{
+	background-color: #ccc;
+}
+
 #play-list{
-	height: 70%;
-	background-color: #ccc;
-} 
+    height: 80%;
+    background-color: #fff;
+    padding-right: 20px;
+}
+#play-list .list-group-item{
+	border: 0px;
+	padding: 0px 15px;
+}
+#play-list li{
+    margin-bottom: 5px;
+}
+#play-list .list-group-item.active{
+	background-color: #fff;
+}
+#play-list .list-group-item.active a{
+}
+#play-list .list-group-item.active span:before{
+	font-family: FontAwesome;
+	content: "\f0da";
+    left:-5px;
+    position:absolute;
+    top:0;
+    color:#000;
+}
+
 #all-music{
-	height: 70%;
-	background-color: #ccc;
-} 
+	padding-top: 20px;
+    height: 80%;
+    background-color: #fff;
+    padding-right: 20px;
+}
+#all-music .list-group-item{
+	border: 0px;
+	padding: 0px 15px;
+}
+
 .my-player-wrapper{
-	height: 30%;
-	background-color: #348a46;
+	height: 20%;
+	background-color: #ccc;
 	position: fixed;
 	bottom: 0px;
-}  
+	border-top: solid 2px lightgoldenrodyellow;
+} 
+.my-player-wrapper .progress{
+	height: 5px;
+    cursor: pointer;
+    margin: 0 0 10px;
+}
+.my-player-wrapper .controls{
+	text-align: center;
+}

@@ -165,15 +165,12 @@ function player()
 
 		console.log('song is stop');
 		var waitTime = 150;
-		setTimeout(function () {   
-
-		  if (self.playing() == true) {
-		   	self.playing(false);
+		setTimeout(function () {  
+		  	self.playing(false);
 			app.pause();
 			self.currentTime(0);
 			app.currentTime = self.currentTime();
-		  }
-
+			self.seekerPercentage(0);
 		}, waitTime);	
 	};
 
@@ -268,7 +265,7 @@ function player()
 
 
 	/*
-	 * START OF ALL COMPUTER LISTENERS
+	 * START OF ALL COMPUTED LISTENERS
 	 */
 
 	 self.tiggerAutoPlay = ko.computed(function(e){
@@ -296,10 +293,18 @@ function player()
 		}
 	});
 
-	self.currentEventListener = ko.computed(function(e){
+	self.currentEventListener = ko.computed(function(){
 
-		self.current();
-
+		$('.list-group-item').removeClass('active');
+		activeSong = self.current();
+		if(activeSong)
+		{
+			var waitTime = 150;
+			setTimeout(function () {   
+				$('.queue-song-' + activeSong.id).addClass('active');
+			}, waitTime);
+				
+		}
 	});
 
 	/* 

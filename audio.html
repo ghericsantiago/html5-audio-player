@@ -8,6 +8,7 @@
 	<body>
 	<div class="music-player-wrapper">
 		<div id="all-music" class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+			<h3>All Music</h3>
 			<ul class="list-group" data-bind="foreach: playlist">
 				<li class="list-group-item">
 					<a href="#" data-bind="text: name, click : $parent.addToQueue"></a>
@@ -18,10 +19,11 @@
 			<a href="#" data-bind="click: search">Click me</a>
 		</div>
 		<div id="play-list" class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+			<h3>Now Playing</h3>
 			<ul class="list-group" data-bind="foreach: queue">
-				<li class="list-group-item">
+				<li class="list-group-item" data-bind="css : ' queue-song-' + id">
 					<div class="col-md-10">
-						<a href="#" data-bind="text: name"></a>					  	
+						<span class=""> </span><a href="#" data-bind="text: name"></a>					  	
 					</div>
 					<div class="col-md-2">
 					  <a href="#" class="fa fa-trash" data-bind="click : $parent.removeToQueue"></a>
@@ -31,30 +33,29 @@
 			</ul>
 		</div>
 	</div>
+
 	<div class="my-player-wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<audio id="my-player">
 	        <source src="" type="audio/mpeg" id="my-audio-track"/>
 			Your browser does not support the audio element.
 		</audio>
-		<h1>
+		<h3>
 			<span>Now Playing: </span>
 			<span id="title" data-bind="text: getSongTitle"></span>
-		</h1>
+		</h3>
 
 		<div class="progress" data-bind="click: seek">
-		  <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: seekerPercentage() + '%' }, attr { aria-valuenow : seekerPercentage() }
-
-		  ">
+		  <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: seekerPercentage() + '%' }, attr { aria-valuenow : seekerPercentage() } ">
 		    <span class="sr-only"></span>
 		  </div>
-		</div>, 
-		 
-
-		<a href="#" class="btn btn-primary" id="prev" data-bind="click: prev">PREV</a>
-		<a href="#" class="btn btn-primary" id="play" data-bind="click: play, visible: !playing()">PLAY</a>
-		<a href="#" class="btn btn-primary" id="pause" data-bind="click: pause, visible: playing()">PAUSE</a>
-		<a href="#" class="btn btn-primary" id="stop" data-bind="click: stop, visible: playing()">STOP</a>
-		<a href="#" class="btn btn-primary" id="next" data-bind="click: next;">NEXT</a>
+		</div> 
+		 <div class="controls">
+		 	<a href="#" class="btn btn-primary fa fa-step-backward" id="prev" data-bind="click: prev, css : (!current()) ? 'disabled' : null"></a>
+			<a href="#" class="btn btn-primary fa fa-play-circle" id="play" data-bind="click: play, visible: !playing(), , css : (!current()) ? 'disabled' : null"></a>
+			<a href="#" class="btn btn-primary fa fa-pause-circle" id="pause" data-bind="click: pause, visible: playing(), , css : (!current()) ? 'disabled' : null"></a>
+			<a href="#" class="btn btn-primary fa fa-stop-circle" id="stop" data-bind="click: stop, css: currentTime() > 0 ? null : 'disabled'"></a>
+			<a href="#" class="btn btn-primary fa fa-step-forward" id="next" data-bind="click: next, , css : (!current()) ? 'disabled' : null"></a>
+		 </div>
 	</div>
 	
 	<script src="js/jquery-1.11.2.min.js"></script>
