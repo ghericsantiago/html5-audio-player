@@ -1,14 +1,19 @@
 <html>
 	<head>
+		<title>
+			Music Player
+		</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet" />
 		<link href="css/jquery-ui.min.css" rel="stylesheet" />
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet" />
 	</head>
 	<body>
+
+
 	<div class="music-player-wrapper">
 		<div id="all-music" class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-			<h3>All Music</h3>
+			<h3>My Music</h3>
 			<ul class="list-group" data-bind="foreach: playlist">
 				<li class="list-group-item">
 					<a href="#" data-bind="text: name, click : $parent.addToQueue"></a>
@@ -22,11 +27,24 @@
 			<h3>Now Playing</h3>
 			<ul class="list-group" data-bind="foreach: queue">
 				<li class="list-group-item" data-bind="css : ' queue-song-' + id">
-					<div class="col-md-10">
+					<div class="col-md-8">
 						<span class=""> </span><a href="#" data-bind="text: name"></a>					  	
 					</div>
-					<div class="col-md-2">
-					  <a href="#" class="fa fa-trash" data-bind="click : $parent.removeToQueue"></a>
+					<div class="col-md-4">
+						<div class="col-md-6">
+							<!-- ko if: $parent.current().id != id -->
+							<a href="#" class="fa fa-play fa-fw" data-bind="click : $parent.playNow"></a>
+							<!-- /ko-->
+							<!-- ko if: $parent.current().id == id && !$parent.playing() -->
+							<a href="#" class="fa fa-play fa-fw" data-bind="click : $parent.play"></a>
+							<!-- /ko -->
+							<!-- ko if: $parent.current().id == id && $parent.playing() -->
+							<a href="#" class="fa fa-pause fa-fw" data-bind="click : $parent.pause"></a>
+							<!-- /ko-->
+						</div>
+						<div class="col-md-6">
+							<a href="#" class="fa fa-trash fa-fw" data-bind="click : $parent.removeToQueue"></a>
+						</div>
 					</div>
 					<div class="clearfix"></div>
 				</li>
@@ -44,11 +62,16 @@
 			<span id="title" data-bind="text: getSongTitle"></span>
 		</h3>
 
-		<div class="progress" data-bind="click: seek">
-		  <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: seekerPercentage() + '%' }, attr { aria-valuenow : seekerPercentage() } ">
+		<div class="progress player-seeker-progress" data-bind="click: seek">
+		  <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: seekerPercentage() + '%' }, attr { aria-valuenow : seekerPercentage() } ">
 		    <span class="sr-only"></span>
 		  </div>
 		</div> 
+		<div class="progress player-buffer-progress">
+			 <div class="progress-bar progress-bar-danger  progress-bar-striped active" data-percentage="100"  role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: bufferPercentage() + '%' }, attr { aria-valuenow : bufferPercentage() } ">
+		    <span class="sr-only"></span>
+		  </div>
+		</div>
 		 <div class="controls">
 		 	<a href="#" class="btn btn-primary fa fa-step-backward" id="prev" data-bind="click: prev, css : (!current()) ? 'disabled' : null"></a>
 			<a href="#" class="btn btn-primary fa fa-play-circle" id="play" data-bind="click: play, visible: !playing(), , css : (!current()) ? 'disabled' : null"></a>

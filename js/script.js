@@ -7,6 +7,7 @@ function player()
 	self.playing = ko.observable(false);
 	self.currentTime = ko.observable(0);
 	self.seekerPercentage = ko.observable(0);
+	self.bufferPercentage = ko.observable(0);
 	self.playlist = ko.observableArray([
 		{ id : 0 , url:'audio/gitara.mp3' , name : 'gitara' },
 		{ id : 1 , url:'audio/harana.mp3' , name : 'harana' },
@@ -70,9 +71,9 @@ function player()
 		{
 
 			// SET SELECTED SONG IN
-			// CURRENT PLAYING IF
+			// CURRENT PLAYING
 			// CURRENT PLAYING IS NOT SET
-			if(!self.current() || self.playing == false)
+			if(!self.current() || self.playing() == false)
 			{
 				self.current(e);
 			}
@@ -200,6 +201,14 @@ function player()
 				app.play();	
 			 }
 		}, waitTime);
+	};
+
+	self.playNow = function(e){
+		self.stop();
+		self.current(e);
+		app.currentTime = 0;
+		app.src = e.url;
+		self.play();
 	};
 
 	self.search = function()
@@ -338,7 +347,7 @@ function player()
 		 */
 		self.seekerPercentage((app.currentTime / app.duration) * 100);
 		self.currentTime(app.currentTime);
-	
+		self.bufferPercentage((app.buffered.end(0) / app.duration) * 100);
 	});
 } 
 

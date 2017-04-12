@@ -29,7 +29,6 @@ body{
 }
 
 #all-music{
-	padding-top: 20px;
     height: 80%;
     background-color: #fff;
     padding-right: 20px;
@@ -53,4 +52,12 @@ body{
 }
 .my-player-wrapper .controls{
 	text-align: center;
+}
+.my-player-wrapper .player-seeker-progress{
+	background-color: transparent;
+}
+.my-player-wrapper .progress.player-buffer-progress{
+    position: relative;
+    margin-top: -15px;
+    z-index: -1;
 }
