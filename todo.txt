@@ -5,5 +5,7 @@ Show Current Playing // ok
 Added Play/Pause beside of each song in Now Playing List // ok
 Show Buffered // ok
 
-loop
-shuffle 
+Loop
+Shuffle
+Categorizing music
+Change my music to play lists
