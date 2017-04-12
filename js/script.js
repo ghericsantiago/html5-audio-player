@@ -3,22 +3,35 @@ function player()
 	var self = this;
 	var app = $('#my-player')[0];
 
+	self.temp = [];
+	self.volume = ko.observable(app.volume * 100);
 	self.current = ko.observable();
 	self.playing = ko.observable(false);
 	self.currentTime = ko.observable(0);
 	self.seekerPercentage = ko.observable(0);
 	self.bufferPercentage = ko.observable(0);
 	self.playlist = ko.observableArray([
-		{ id : 0 , url:'audio/gitara.mp3' , name : 'gitara' },
-		{ id : 1 , url:'audio/harana.mp3' , name : 'harana' },
-		{ id : 2 , url:'audio/harana.mp3' , name : 'harana2' },
-		{ id : 3 , url:'audio/horse.mp3' , name : 'horse' }
+		{ id : 0 , url:'audio/gitara.mp3' , name : 'Gitara' },
+		{ id : 1 , url:'audio/harana.mp3' , name : 'Harana' },
+		{ id : 2 , url:'audio/harana.mp3' , name : 'Harana2' },
+		{ id : 3 , url:'audio/horse.mp3' , name : 'Horse' }
 		]);
 	self.queue = ko.observableArray([]);
 
 	/*
 	 * START OF PLAYER METHODS
 	 */
+
+	 self.toggleVolume = function(){
+
+	 	if(self.volume())
+	 	{
+	 		self.temp['volume'] = self.volume();
+	 		self.volume(0);
+	 	}
+	 	else
+	 		self.volume(self.temp['volume']);
+	 }
 
 	self.next = function(){
 		
@@ -243,6 +256,7 @@ function player()
 		 */
 		if(self.current() && self.queue())
 		{
+			console.log('Seeking');
 			/*
 			 * GET THE MOUSE POSITION RELATIVE TO PROGRESS DIV
 			 * COMPUTE THE PERCENTAGE OF SELECTED POSITION RELATIVE 
@@ -276,6 +290,11 @@ function player()
 	/*
 	 * START OF ALL COMPUTED LISTENERS
 	 */
+
+	 self.volumeUpdated = ko.computed(function(){
+	 	volume = self.volume();
+	 	app.volume = volume / 100;
+	 });
 
 	 self.tiggerAutoPlay = ko.computed(function(e){
 
@@ -334,7 +353,7 @@ function player()
 		}
 		else
 		{
-			self.seekerPercentage(0);
+			//self.seekerPercentage(0);
 			self.playing(false);	
 		}
 	});
@@ -345,9 +364,12 @@ function player()
 		 * UPDATE THE SEEKER AND 
 		 * CURRENT TIME VARIABLES
 		 */
-		self.seekerPercentage((app.currentTime / app.duration) * 100);
-		self.currentTime(app.currentTime);
-		self.bufferPercentage((app.buffered.end(0) / app.duration) * 100);
+		 if(self.current() && self.playing())
+		 {
+			self.seekerPercentage((app.currentTime / app.duration) * 100);
+			self.currentTime(app.currentTime);
+			self.bufferPercentage((app.buffered.end(0) / app.duration) * 100); 	
+		 }
 	});
 } 
 

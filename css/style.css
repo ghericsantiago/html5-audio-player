@@ -61,3 +61,17 @@ body{
     margin-top: -15px;
     z-index: -1;
 }
+
+.my-player-wrapper .controls li{
+	list-style: none;
+    display: inline-block;
+}
+.my-player-wrapper .controls #play{
+    background-color: red;
+}
+
+.my-player-wrapper .controls .volume-control{
+    position: relative;
+    top: 6px;
+    width: 100px;
+}
