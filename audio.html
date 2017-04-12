@@ -53,10 +53,7 @@
 	</div>
 
 	<div class="my-player-wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<audio id="my-player">
-	        <source src="" type="audio/mpeg" id="my-audio-track"/>
-			Your browser does not support the audio element.
-		</audio>
+	
 		<h3>
 			<span>Now Playing: </span>
 			<span id="title" data-bind="text: getSongTitle"></span>
@@ -74,10 +71,10 @@
 		</div>
  		<ul class="controls">
  			<li> 
- 				<a href="#" class="btn btn-primary fa fa-random " id="prev" data-bind="click: prev, css : (!current()) ? 'disabled' : null"></a>
+ 				<a href="#" class="btn btn-primary fa fa-random " id="prev" data-bind="click: toggleRandom, css : (random()) ? 'active' : null"></a>
  			</li>
  			<li> 
- 				<a href="#" class="btn btn-primary fa fa-repeat" id="prev" data-bind="click: prev, css : (!current()) ? 'disabled' : null"></a>
+ 				<a href="#" class="btn btn-primary fa fa-repeat" id="prev" data-bind="click: toggleRepeat, css : (repeat()) ? 'active' : null"></a>
  			</li>
  			<li> 
  				<a href="#" class="btn btn-primary fa fa-step-backward" id="prev" data-bind="click: prev, css : (!current()) ? 'disabled' : null"></a>

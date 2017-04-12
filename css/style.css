@@ -66,6 +66,12 @@ body{
 	list-style: none;
     display: inline-block;
 }
+
+.my-player-wrapper .controls .btn.active{
+    background-color: #0b3254;
+}
+
+
 .my-player-wrapper .controls #play{
     background-color: red;
 }
