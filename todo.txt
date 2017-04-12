@@ -1,0 +1,9 @@
+Volume // ok
+Mute/Unmute Toggle
+Play/Pause Toggle // ok
+Show Current Playing // ok
+Added Play/Pause beside of each song in Now Playing List // ok
+Show Buffered // ok
+
+loop
+shuffle 
